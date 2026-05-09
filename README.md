@@ -29,7 +29,7 @@ Cloudflare Workers + Wrangler でデプロイします。
 
 ```bash
 python3 scripts/build_windows.py --copy-to-web
-cp -r assets/ web/assets/
+cp -r assets/ web/sopocursor/assets/
 npx wrangler deploy
 ```
 

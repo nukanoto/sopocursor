@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "assets"
 DIST = ROOT / "dist"
 WINDOWS_BUILD = DIST / "windows"
+WEB_PACKAGE = ROOT / "web" / "sopocursor" / "sopocursor-windows.zip"
 
 CURSORS = {
     "arrow": {"png": "arrow.png", "hotspot": (3, 5), "roles": ["Arrow"]},
@@ -171,7 +172,8 @@ def main() -> None:
 
     zip_path = build()
     if args.copy_to_web:
-        shutil.copy2(zip_path, ROOT / "web" / zip_path.name)
+        WEB_PACKAGE.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(zip_path, WEB_PACKAGE)
     print(zip_path.relative_to(ROOT))
 
 

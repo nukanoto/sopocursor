@@ -2,6 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "sopocursor",
   "compatibility_date": "2026-05-09",
+  "route": "nukanoto.net/sopocursor*",
   "assets": {
     "directory": "./web"
   }
