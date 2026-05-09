@@ -18,7 +18,11 @@ jobs:
         run: python3 scripts/build_windows.py --copy-to-web
 
       - name: Copy assets into web/
-        run: cp -r assets/ web/sopocursor/assets/
+        run: |
+          rm -rf web/sopocursor/assets
+          mkdir -p web/sopocursor/assets
+          cp assets/*.png web/sopocursor/assets/
+          cp net.nukanoto.sopocursor.799992902.533678.cape web/sopocursor/
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
