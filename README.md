@@ -1,4 +1,4 @@
-# SopoCursor
+# そぽカーソル
 
 そぽたんの macOS / Windows 用カーソルテーマです。
 
@@ -8,30 +8,6 @@
 assets/        カーソル画像 (PNG)
 scripts/       配布用ファイル生成スクリプト
 web/           Webサイト
-wrangler.jsonc Cloudflare Workers 設定
-```
-
-## Webサイトのデプロイ
-
-Cloudflare Workers + Wrangler でデプロイします。
-
-### 初回セットアップ
-
-1. Cloudflare ダッシュボードで `sopocursor` プロジェクトを作成します
-2. GitHub リポジトリの Secrets に以下を追加します
-
-| Secret 名 | 内容 |
-| --- | --- |
-| `CLOUDFLARE_API_TOKEN` | Cloudflare API トークン |
-| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare アカウント ID |
-
-### 手動デプロイ
-
-```bash
-python3 -m pip install Pillow
-python3 scripts/build_windows.py --copy-to-web
-cp -r assets/ web/sopocursor/assets/
-npx wrangler deploy
 ```
 
 ## カーソルのインストール
