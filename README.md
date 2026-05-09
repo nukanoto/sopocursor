@@ -37,9 +37,9 @@ npx wrangler deploy
 
 ### macOS
 
-1. [Cursor Pro](https://cursor.pro) をインストールします
-2. `.cape` ファイルを Cursor Pro で開きます
-3. メニューバーから SopoCursor を選択して適用します
+1. [Mousecape](https://github.com/alexzielenski/Mousecape/releases) をインストールします
+2. `.cape` ファイルをダブルクリックするか、Mousecape の `File` > `Import Cape` から読み込みます
+3. Mousecape で `SopoCursor` を選択し、`Capes` > `Apply Cape` を実行します
 
 ### Windows
 

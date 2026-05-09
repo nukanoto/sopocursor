@@ -120,18 +120,18 @@ def write_readme(path: Path) -> None:
     path.write_text(
         """SopoCursor for Windows
 
-Install:
-1. Extract this ZIP file.
-2. Right-click install.inf and choose Install.
-3. Open Windows Settings > Bluetooth & devices > Mouse > Additional mouse settings.
-4. In the Pointers tab, select the SopoCursor scheme and apply it.
+インストール方法:
+1. このZIPファイルを展開します。
+2. install.inf を右クリックして「インストール」を選びます。
+3. Windowsの「設定」>「Bluetooth とデバイス」>「マウス」>「マウスの追加設定」を開きます。
+4. 「ポインター」タブで SopoCursor を選択して適用します。
 
-Included cursor roles:
-- Normal Select
-- Link Select
-- Vertical Resize
-- Horizontal Resize
-- Unavailable
+含まれるカーソル:
+- 通常の選択
+- リンクの選択
+- 垂直方向のサイズ変更
+- 水平方向のサイズ変更
+- 利用不可
 """,
         encoding="utf-8",
     )
