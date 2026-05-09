@@ -3,3 +3,4 @@ dist/
 web/sopocursor/assets/
 web/sopocursor/sopocursor-windows.zip
 web/sopocursor/*.cape
+__pycache__
