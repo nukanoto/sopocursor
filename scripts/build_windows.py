@@ -3,7 +3,10 @@ import argparse
 import shutil
 import struct
 import zipfile
+from io import BytesIO
 from pathlib import Path
+
+from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -11,6 +14,7 @@ ASSETS = ROOT / "assets"
 DIST = ROOT / "dist"
 WINDOWS_BUILD = DIST / "windows"
 WEB_PACKAGE = ROOT / "web" / "sopocursor" / "sopocursor-windows.zip"
+WINDOWS_CURSOR_SIZE = (32, 32)
 
 CURSORS = {
     "arrow": {"png": "arrow.png", "hotspot": (3, 5), "roles": ["Arrow"]},
@@ -55,11 +59,30 @@ def read_png_size(png: bytes) -> tuple[int, int]:
     return struct.unpack(">II", png[16:24])
 
 
+def scale_hotspot(hotspot: tuple[int, int], source_size: tuple[int, int]) -> tuple[int, int]:
+    return (
+        round(hotspot[0] * WINDOWS_CURSOR_SIZE[0] / source_size[0]),
+        round(hotspot[1] * WINDOWS_CURSOR_SIZE[1] / source_size[1]),
+    )
+
+
+def resized_png_bytes(png_path: Path) -> tuple[bytes, tuple[int, int], tuple[int, int]]:
+    with Image.open(png_path) as image:
+        source_size = image.size
+        resized = image.convert("RGBA").resize(WINDOWS_CURSOR_SIZE, Image.Resampling.LANCZOS)
+        output = BytesIO()
+        resized.save(output, format="PNG")
+        return output.getvalue(), source_size, resized.size
+
+
 def write_cur(png_path: Path, cur_path: Path, hotspot: tuple[int, int]) -> None:
-    png = png_path.read_bytes()
+    png, source_size, cursor_size = resized_png_bytes(png_path)
     width, height = read_png_size(png)
+    if (width, height) != cursor_size:
+        raise ValueError(f"{png_path} was not resized correctly")
     if width > 256 or height > 256:
         raise ValueError(f"{png_path} is too large for a cursor entry")
+    scaled_hotspot = scale_hotspot(hotspot, source_size)
 
     header = struct.pack("<HHH", 0, 2, 1)
     directory = struct.pack(
@@ -68,8 +91,8 @@ def write_cur(png_path: Path, cur_path: Path, hotspot: tuple[int, int]) -> None:
         0 if height == 256 else height,
         0,
         0,
-        hotspot[0],
-        hotspot[1],
+        scaled_hotspot[0],
+        scaled_hotspot[1],
         len(png),
         len(header) + 16,
     )

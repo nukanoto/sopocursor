@@ -28,6 +28,7 @@ Cloudflare Workers + Wrangler でデプロイします。
 ### 手動デプロイ
 
 ```bash
+python3 -m pip install Pillow
 python3 scripts/build_windows.py --copy-to-web
 cp -r assets/ web/sopocursor/assets/
 npx wrangler deploy
@@ -50,7 +51,8 @@ npx wrangler deploy
 ## Windows版の生成
 
 ```bash
+python3 -m pip install Pillow
 python3 scripts/build_windows.py
 ```
 
-生成されたZIPとWindows用カーソル一式は `dist/` に出力され、Git管理には含めません。
+生成されたZIPとWindows用カーソル一式は `dist/` に出力され、Git管理には含めません。Windows用カーソルは元画像を32x32に縮小して生成します。
