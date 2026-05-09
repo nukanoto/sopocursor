@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Build Windows package
+        run: python3 scripts/build_windows.py --copy-to-web
+
       - name: Copy assets into web/
         run: cp -r assets/ web/assets/
 
@@ -18,3 +21,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy

@@ -1,9 +1,0 @@
-name = "sopocursor"
-compatibility_date = "2026-05-09"
-
-[assets]
-directory = "./web"
-
-[[routes]]
-pattern = "nukanoto.net/sopocursor*"
-zone_name = "nukanoto.net"

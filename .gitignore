@@ -1,1 +1,4 @@
 .DS_Store
+dist/
+web/assets/
+web/sopocursor-windows.zip
