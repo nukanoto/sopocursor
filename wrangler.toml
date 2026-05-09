@@ -1,2 +1,8 @@
 name = "sopocursor"
-pages_build_output_dir = "web"
+
+[assets]
+directory = "./web"
+
+[[routes]]
+pattern = "nukanoto.net/sopocursor*"
+zone_name = "nukanoto.net"
